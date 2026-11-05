@@ -1,6 +1,6 @@
 # archive dumps
 
-**Live website:** [yesjermo.github.io/project-archive](https://yesjermo.github.io/archive/)
+**Live website:** [yesjermo.github.io/archive](https://yesjermo.github.io/archive/)
 
 **my favourite archives / a little collection, still growing.**
 
