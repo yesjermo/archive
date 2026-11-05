@@ -1,0 +1,563 @@
+/* Night: the archive after dark, after the subtitle screens of a late-90s
+   film intro. True black, small white type, nothing else competing.
+   Photographs, the book and paper objects stay as they are: keepsakes on a
+   dark table. Loaded last on every page so it overrides the paper theme. */
+/* Serif: every bold display face and every Arial on the site becomes
+   Instrument Serif (fonts/serif.ttf, SIL OFL; licence in fonts/). The faces
+   below reuse the old family names, so each rule that asked for Archivo Black,
+   the condensed grotesk or Arial now gets the serif. Delete this block to undo.
+   Instrument Serif sits small, so it is scaled up a little to stay readable. */
+@font-face {
+  font-family: "Archive Display";
+  src: url("../fonts/serif.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 112%;
+}
+@font-face {
+  font-family: "Print Grotesk";
+  src: url("../fonts/serif.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 112%;
+}
+@font-face {
+  font-family: Arial;
+  src: url("../fonts/serif.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  size-adjust: 118%;
+}
+@font-face {
+  font-family: Arial;
+  src: url("../fonts/serif-italic.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+  size-adjust: 118%;
+}
+@font-face {
+  font-family: "Archive Serif";
+  src: url("../fonts/serif.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+  --night: #000000;
+  --night-raised: #0b0b0b;
+  --night-line: #262626;
+  --night-ink: #d8d8d8;
+  --night-dim: #8c8c8c;
+  --night-bright: #f4f4f4;
+  --screen-ink: #f4f4f4;
+  --screen-dim: #9a9a9a;
+  --font-display: "Archive Display", Georgia, serif;
+  --font-body: Arial, Georgia, serif;
+  /* Repoint the paper theme's own tokens so rules that use them follow. */
+  --paper: var(--night);
+  --ink: var(--night-ink);
+  --muted: var(--night-dim);
+  --line: var(--night-line);
+  --accent: var(--screen-ink);
+}
+
+html {
+  background: var(--night);
+  scrollbar-color: #2a2a2a var(--night);
+}
+html body,
+html body[class] {
+  background: var(--night) !important;
+  background-image: none !important;
+  color: var(--night-ink);
+  caret-color: var(--screen-ink);
+}
+::selection {
+  background: var(--screen-ink);
+  color: #000000;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--night);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a2a;
+  border: 2px solid var(--night);
+  border-radius: 10px;
+}
+
+/* Type */
+/* Headings brighten in the room, but not on paper objects (see below). */
+:is(h1, h2, h3):not(
+    :is(.sheet, .book-cover, .orbit-item, .related-card, .demo-ticket, .concert-ticket) *
+  ) {
+  color: var(--night-bright) !important;
+}
+a {
+  color: inherit;
+}
+a:hover {
+  color: var(--screen-ink);
+}
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--screen-ink) !important;
+  outline-offset: 4px;
+}
+
+/* Controls. The paper theme forces light pills with !important; repaint them. */
+html body button:not(.orbit-item):not(.book-cover),
+html body .archive-action,
+html body .file-label,
+html body .hero-actions a {
+  background: var(--night-raised) !important;
+  color: var(--night-ink) !important;
+  border: 1px solid #333333 !important;
+  box-shadow: none !important;
+}
+html body button:not(.orbit-item):not(.book-cover):hover:not(:disabled),
+html body .archive-action:hover,
+html body .file-label:hover {
+  background: #161616 !important;
+  border-color: var(--screen-dim) !important;
+  color: var(--night-bright) !important;
+}
+html body button[aria-pressed="true"]:not(.orbit-item),
+html body button[aria-selected="true"]:not(.orbit-item) {
+  background: var(--screen-ink) !important;
+  border-color: var(--screen-ink) !important;
+  color: #000000 !important;
+}
+html
+  body
+  button[aria-pressed="true"]:not(.orbit-item):not(.book-cover):hover:not(:disabled),
+html
+  body
+  button[aria-selected="true"]:not(.orbit-item):not(.book-cover):hover:not(:disabled) {
+  background: #cfcfcf !important;
+  border-color: #cfcfcf !important;
+  color: #000000 !important;
+}
+html body input,
+html body select,
+html body textarea {
+  background: transparent;
+  color: var(--night-ink);
+  border-color: #333333;
+}
+html body select option {
+  background: var(--night-raised);
+  color: var(--night-ink);
+}
+html body input[type="range"] {
+  accent-color: var(--screen-ink);
+}
+
+/* Header tag, floating menus, sound pill */
+html body .room-toolbar .room-home,
+html body .page-about header .room-home {
+  background: var(--night-raised) !important;
+  color: var(--night-bright) !important;
+  border: 1px solid var(--night-line);
+  box-shadow: none !important;
+}
+html body .floating-panel {
+  background: var(--night-raised) !important;
+  color: var(--night-ink) !important;
+  border: 1px solid var(--night-line) !important;
+  box-shadow: 0 18px 40px #00000080 !important;
+}
+
+/* Footer */
+html body .sketch-footer,
+html body .sketch-footer p,
+html body .sketch-footer nav a {
+  color: var(--night-ink) !important;
+}
+html body .sketch-footer nav a:hover,
+html body .sketch-footer nav a:focus-visible {
+  color: var(--screen-ink) !important;
+}
+html body .sketch-footer svg {
+  opacity: 0.55;
+}
+
+/* Small typed labels: quiet grey, like timecode. */
+html body .folio,
+html body #collection-count,
+html body #entry-meta,
+html body .study-caption,
+html body .turn-direction {
+  color: var(--screen-dim) !important;
+}
+
+/* Home */
+html body .collage-title {
+  background: #000000d9 !important;
+  box-shadow: 0 0 0 1px var(--night-line);
+}
+html body .collage-title .primary {
+  background: var(--screen-ink) !important;
+  color: #000000 !important;
+}
+html body .collage-title .primary:hover {
+  background: #cfcfcf !important;
+  color: #000000 !important;
+}
+html body .collage-note {
+  background: var(--night-raised) !important;
+  color: var(--night-ink) !important;
+  border: 1px solid var(--night-line);
+  box-shadow: none !important;
+}
+html body .scrap span {
+  color: var(--night-ink) !important;
+  background: transparent !important;
+}
+html body .scrap .scrap-note {
+  color: var(--night-dim) !important;
+}
+html body .home-introduction {
+  background: var(--night-raised) !important;
+  border: 1px solid var(--night-line);
+}
+html body .home-index {
+  border-top-color: var(--night-line) !important;
+}
+@media (max-width: 650px) {
+  /* captions crossing photos keep a dark backing instead of the paper one */
+  html body .scrap span {
+    background: #000000d9 !important;
+  }
+}
+/* The sound pill is a minor control: outline, not a green block. */
+html body button.sound-toggle.sound-toggle,
+html body button.sound-toggle.sound-toggle[aria-pressed="true"],
+html body button.sound-toggle.sound-toggle[aria-pressed="true"]:hover:not(:disabled) {
+  background: var(--night-raised) !important;
+  border-color: var(--night-line) !important;
+  color: var(--night-ink) !important;
+}
+html body .sound-toggle .sound-state {
+  color: var(--screen-ink);
+}
+
+/* Archive */
+html body .layout-choice,
+html body .archive-bottom .handwritten,
+html body #view-hint {
+  color: var(--night-dim) !important;
+}
+html body .circle.solid,
+html body a.circle {
+  background: var(--night-raised) !important;
+  color: var(--night-ink) !important;
+  border: 1px solid #333333 !important;
+}
+html body a.circle:hover {
+  border-color: var(--screen-dim) !important;
+  color: var(--night-bright) !important;
+}
+
+/* Paper objects keep the paper theme's ink: the book, its cover and pages,
+   orbit cards, related Polaroids, tickets and the CD label. */
+html
+  body
+  :is(
+    .sheet,
+    .book-cover,
+    .orbit-item,
+    .related-card,
+    .demo-ticket,
+    .concert-ticket,
+    #spotify-disc
+  ) {
+  --ink: #252621;
+  --muted: #65655f;
+  --line: #cecec6;
+  --accent: #8f3f34;
+  color: #252621;
+}
+html body :is(.sheet, .book-cover, .related-card) :is(h1, h2, h3, a, small, span, p) {
+  color: #252621;
+}
+
+/* Orbit: the watermark stays a whisper, captions read on the dark room. */
+html body .orbit-center {
+  color: #1c1c1c !important;
+}
+html body .orbit-center span {
+  color: #242424 !important;
+}
+html body .orbit-item > strong {
+  color: var(--night-ink) !important;
+}
+
+/* Entry: the article sits in the dark room; only the photo keeps its frame. */
+html body.page-entry article,
+html body.pencil-layout.page-entry article {
+  background: none !important;
+  box-shadow: none !important;
+}
+html body.page-entry #entry-description,
+html body.page-entry #entry-story {
+  color: var(--night-ink) !important;
+}
+html body.page-entry .turn-title {
+  color: var(--night-bright);
+}
+html body.page-entry #entry-pagination {
+  border-color: var(--night-line) !important;
+}
+html body.page-entry #entry-caption,
+html body.page-entry #entry-credit {
+  color: var(--night-dim) !important;
+}
+
+/* Playroom: the note lies on a dark desk. */
+html body .scrap-room .fold-bench {
+  background: var(--night-raised) !important;
+  box-shadow: inset 0 0 0 1px var(--night-line) !important;
+}
+html body .scrap-room .scrap-hint,
+html body .scrap-room .bench-note {
+  color: var(--night-dim) !important;
+  background: transparent !important;
+}
+
+/* About: the terminal speaks in plain white. */
+html body.page-about {
+  color: var(--night-ink);
+}
+html body.page-about :is(.terminal-command, .terminal-note, .terminal-end, .type-cursor),
+html body.page-about .terminal-end span {
+  color: var(--screen-ink) !important;
+}
+html body.page-about .terminal-about {
+  border-color: #3a3a3a !important;
+}
+
+/* Subtitle lines: the site's small poetic lines, set like film subtitles:
+   a Mincho serif, centred, held in 《 》. */
+html body :where(.collage-title .subtitle-line, .scrap-room .scrap-hint, #view-hint) {
+  font-family: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP",
+    "Times New Roman", serif !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+  letter-spacing: 0.06em;
+  color: var(--night-bright) !important;
+  text-align: center;
+  transform: none !important;
+}
+html
+  body
+  :where(.collage-title .subtitle-line, .scrap-room .scrap-hint, #view-hint)::before {
+  content: "《\2009";
+  content: "《\2009" / "";
+}
+html
+  body
+  :where(.collage-title .subtitle-line, .scrap-room .scrap-hint, #view-hint)::after {
+  content: "\2009》";
+  content: "\2009》" / "";
+}
+/* A line of mis-decoded text, the way Shift-JIS used to break on screen. */
+html body .collage-title .mojibake {
+  margin: 0 0 6px;
+  font:
+    400 13px/1.4 "Times New Roman",
+    serif;
+  letter-spacing: 0.08em;
+  color: var(--night-dim);
+  transform: none;
+}
+@media (max-width: 650px) {
+  /* Phones: keep the subtitle on one line, and drop the decorative mojibake
+     so the title card doesn't push its button into the note below. */
+  html body .collage-title .subtitle-line,
+  html body .scrap-room .scrap-hint {
+    font-size: 13px !important;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+  html body .collage-title .mojibake {
+    display: none;
+  }
+}
+
+/* Front-page intro: black screen, a garbled line that decodes, then lines
+   that type out like subtitles. Shown only when the head script turns it on. */
+.bbs-intro {
+  display: none;
+}
+html.bbs-intro-on {
+  overflow: hidden;
+}
+html.bbs-intro-on .bbs-intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: #000;
+  color: #f4f4f4;
+  cursor: pointer;
+  transition: opacity 0.7s ease;
+}
+.bbs-intro.is-leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+.bbs-intro-lines {
+  display: grid;
+  gap: 34px;
+  justify-items: center;
+  text-align: center;
+}
+.bbs-line {
+  margin: 0;
+  min-height: 1.6em;
+  max-width: none;
+  white-space: pre-wrap;
+}
+.bbs-garble,
+.bbs-mincho {
+  font:
+    400 clamp(15px, 2vw, 19px) / 1.6 "Hiragino Mincho ProN",
+    "Yu Mincho",
+    YuMincho,
+    "Noto Serif JP",
+    "Times New Roman",
+    serif;
+  letter-spacing: 0.08em;
+}
+.bbs-garble {
+  color: #bdbdbd;
+}
+.bbs-subtitle {
+  margin-top: 26px;
+  font:
+    400 clamp(14px, 1.7vw, 17px) / 1.5 Arial,
+    Helvetica,
+    sans-serif;
+  letter-spacing: 0.02em;
+}
+.bbs-line.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.55em;
+  height: 1.05em;
+  margin-left: 3px;
+  vertical-align: -0.15em;
+  background: currentColor;
+  animation: bbs-caret 1s steps(1) infinite;
+}
+.bbs-skip {
+  position: absolute;
+  right: 22px;
+  bottom: 20px;
+  font: 12px/1 var(--font-label, monospace);
+  letter-spacing: 0.08em;
+  color: #8c8c8c;
+}
+@keyframes bbs-caret {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.bbs-intro-on .bbs-intro {
+    transition: none;
+  }
+  .bbs-line.is-typing::after {
+    animation: none;
+  }
+}
+
+/* Typing cursor for subtitle lines (see js/typed-lines.js). */
+.typed-caret {
+  display: inline-block;
+  width: 0.5em;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -0.12em;
+  background: currentColor;
+  animation: bbs-caret 1s steps(1) infinite;
+}
+
+/* ARCHIVE DUMPS: light handwriting on the dark screen, typed out like a note
+   (see js/typed-lines.js). Lowercase on screen; the words stay the same. */
+html body .collage-title h1 {
+  font-family: var(--font-hand) !important;
+  font-size: clamp(64px, 8.2vw, 116px) !important;
+  font-weight: 400 !important;
+  line-height: 0.86 !important;
+  letter-spacing: 0.01em !important;
+  text-transform: lowercase !important;
+  color: #ececec !important;
+  filter: none !important;
+  margin: 10px 0 24px !important;
+  min-height: 1.72em;
+}
+html body .room-title h1 {
+  font: 400 40px/1 var(--font-hand) !important;
+  letter-spacing: 0.01em !important;
+  text-transform: lowercase !important;
+  color: #ececec !important;
+}
+@media (max-width: 650px) {
+  html body .collage-title h1 {
+    font-size: clamp(56px, 19vw, 78px) !important;
+  }
+}
+/* On the big handwritten title, the cursor is a thin pen line, not a block. */
+html body .collage-title h1 .typed-caret {
+  width: 0.04em;
+  height: 0.7em;
+  margin-left: 0.06em;
+  vertical-align: -0.02em;
+}
+@media (min-width: 651px) {
+  /* The handwritten title makes the card taller; the tag now sits just
+     below it, stuck over the top of the poster, instead of over the button. */
+  html body .collage-note {
+    bottom: 14%;
+  }
+}
+@media (max-width: 650px) {
+  html body .collage-note {
+    bottom: 18%;
+  }
+}
+
+/* The serif has one weight; show bold text as the serif itself, not a fake bold. */
+html {
+  font-synthesis-weight: none;
+}
+/* The old headings were tracked tight for a wide black face; the condensed
+   serif needs its natural spacing. The handwritten titles keep their own. */
+html
+  body
+  :is(h1, h2, h3, .book-cover strong, .orbit-center):not(.collage-title h1):not(
+    .room-title h1
+  ) {
+  letter-spacing: 0 !important;
+}
+html body.page-entry #entry-title {
+  line-height: 0.92 !important;
+}
